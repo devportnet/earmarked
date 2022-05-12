@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{meta_title}}</title>
+	<link rel="stylesheet" href="{{asset "css/screen.css"}}">
+	<link rel="stylesheet" href="{{asset "fonts/css/all.min.css"}}">
+
+	{{ghost_head}}
+</head>
+
+<body class="{{body_class}}">
+
+	<div id="page" class="site">
+
+		<header id="masthead" class="site-header">
+			<div class="header-wrapper">
+				<nav id="site-navigation" class="main-navigation">
+					<button class="menu-toggle">Menu</button>
+					{{navigation}}
+				</nav><!-- #site-navigation -->
+			</div><!-- .header-wrapper -->
+
+			<div class="header-image">
+				{{! Checks for featured image. If none, use cover image if available. }}
+				{{#post}}
+					{{#if feature_image}}
+						<img src="{{img_url feature_image}}" alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
+					{{else}}
+						{{#if @site.cover_image}}<img src="{{@site.cover_image}}" alt="Blog" height="auto"/>{{/if}}
+					{{/if}}
+				{{else}}
+					{{#if @site.cover_image}}<img src="{{@site.cover_image}}" alt="Blog" height="auto"/>{{/if}}
+				{{/post}}
+			</div><!-- .header-image -->
+		</header><!-- #masthead -->
+
+		<div id="content" class="site-content">
+
+			<div id="primary" class="content-area">
+				<main id="main" class="site-main">
+					{{{body}}}
+				</main><!-- #main -->
+			</div><!-- #primary -->
+
+			<div id="secondary" class="widget-area">
+				<aside class="widget">
+					{{#if @site.logo}}<a class="blog-logo" href="{{@site.url}}"><img src="{{@site.logo}}" alt="Blog Logo" /></a>{{/if}}
+
+					<h3 class="widget-title site-title"><a href="{{@site.url}}">{{@site.title}}</a></h3>
+					<p class="site-description">{{@site.description}}</p>
+				</aside>
+
+				<aside class="widget">
+					{{> external-sidebar}}
+				</aside>
+
+				<footer class="site-footer">
+					<div class="site-info">
+						<section class="copyright">Earmarked by <a href="https://devport.net">Devport</a></section>
+						<section class="poweredby">Published with <a href="https://ghost.org">Ghost</a></section>
+					</div>
+				</footer>
+			</div><!-- #secondary -->
+
+		</div><!-- #content -->
+	</div><!-- #page -->
+
+	{{! Ghost outputs important scripts and data with this tag }}
+	{{ghost_foot}}
+
+	{{! The main JavaScript files}}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script type="text/javascript" src="{{asset "js/index.js"}}"></script>
+	<script type="text/javascript" src="{{asset "js/navigation.js"}}"></script>
+
+
+</body>
+</html>
